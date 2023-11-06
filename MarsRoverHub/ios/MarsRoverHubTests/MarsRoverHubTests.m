@@ -7,11 +7,11 @@
 #define TIMEOUT_SECONDS 600
 #define TEXT_TO_LOOK_FOR @"Welcome to React"
 
-@interface MarsRoverHubTests : XCTestCase
+@interface marsroverhubTests : XCTestCase
 
 @end
 
-@implementation MarsRoverHubTests
+@implementation marsroverhubTests
 
 - (BOOL)findSubviewInView:(UIView *)view matching:(BOOL (^)(UIView *view))test
 {

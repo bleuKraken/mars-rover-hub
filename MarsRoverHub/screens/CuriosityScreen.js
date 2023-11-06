@@ -2,16 +2,17 @@ import React from 'react';
 
 import {View, Text, StyleSheet} from 'react-native';
 
+
 // MAIN FUNCTION
-function SummaryScreen() {
+function CuriosityScreen() {
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text>Curiosity Screen</Text>
     </View>
   );
 }
 
-export default SummaryScreen;
+export default CuriosityScreen;
 
 const styles = StyleSheet.create({
   container: {
