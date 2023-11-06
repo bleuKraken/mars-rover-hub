@@ -1,4 +1,14 @@
-import {Pressable, StyleSheet, View, Text, Image} from 'react-native';
+import React from 'react';
+import {ImageBackground, StyleSheet, Text, View} from 'react-native';
+
+// ! This component currrently doesnt work due to local image location being passed in as a variable
+// ! RN doesnt like that 
+//const image = {uri: 'https://legacy.reactjs.org/logo-og.png'};
+
+// const image = {uri: '../images/rovers/curiosity_hq.jpg'};
+// * This image location works
+// const image = require('../images/rovers/curiosity_hq.jpg');
+
 
 // MAIN FUNCTION
 function RoverCard({
@@ -9,19 +19,11 @@ function RoverCard({
   onPress,
 }) {
   return (
-    <Pressable onPress={onPress} style={styles.container}>
-      <Image
-        style={{
-          resizeMode: 'contain',
-          height: 250,
-        }}
-        source={require('../images/rovers/curiosity_hq.jpg')}
-      />
-        <Text>Name: {roverName}</Text>
-
-        <Text>Last date: {lastPhotoData}</Text>
-        <Text>Camera Count: {cameraCount}</Text>
-    </Pressable>
+    <View style={styles.container}>
+      <ImageBackground source={image} resizeMode="cover" style={styles.image}>
+        <Text style={styles.text}>Inside</Text>
+      </ImageBackground>
+    </View>
   );
 }
 

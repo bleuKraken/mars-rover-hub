@@ -8,9 +8,12 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 // Components
-import RoverCard from './components/RoverCard';
+// import RoverCard from './components/RoverCard';
+// * Components
 import CuriosityCard from './components/CuriosityCard';
-import SpiritCard from './components/Spirit';
+import SpiritCard from './components/SpiritCard';
+import PerseveranceCard from './components/PerseveranceCard';
+import OpportunityCard from './components/OpportunityCard';
 // Screens
 // import RoverSelectedScreen from './screens/RoverSelectedScreen';
 import SpiritScreen from './screens/SpiritScreen';
@@ -18,26 +21,25 @@ import CuriosityScreen from './screens/CuriosityScreen';
 import OpportunityScreen from './screens/OpportunityScreen';
 import PerseveranceScreen from './screens/PerseveranceScreen';
 
-import HomeScreen from './screens/HomeScreen';
+// import HomeScreen from './screens/HomeScreen';
 
 // ! This is home screen ~~~~~~~~~~~~~
 function Home({navigation}) {
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Home screen 2</Text>
 
-        <RoverCard
-          roverName="Spirit"
-          lastPhotoData={'12/10/23'}
-          cameraCount={'23'}
-          onPress={() => navigation.navigate('Spirit')}
-        />
-
+      <ScrollView>
         <CuriosityCard
           roverName="Curiosity"
           lastPhotoData={'12/10/23'}
           cameraCount={'23'}
           onPress={() => navigation.navigate('Curiosity')}
+        />
+
+        <PerseveranceCard
+          roverName="Perseverance"
+          lastPhotoData={'12/10/23'}
+          cameraCount={'23'}
+          onPress={() => navigation.navigate('Perseverance')}
         />
 
         <SpiritCard
@@ -47,6 +49,14 @@ function Home({navigation}) {
           onPress={() => navigation.navigate('Spirit')}
         />
 
+        <OpportunityCard
+          roverName="Opportunity"
+          lastPhotoData={'12/10/23'}
+          cameraCount={'23'}
+          onPress={() => navigation.navigate('Opportunity')}
+        />
+
+        {/*
         <Button
           title="Spirit Rover"
           onPress={() => navigation.navigate('Spirit')}
@@ -66,7 +76,9 @@ function Home({navigation}) {
           title="Perseverance Rover"
           onPress={() => navigation.navigate('Perseverance')}
         />
-    </View>
+
+  */}
+      </ScrollView>
   );
 }
 
@@ -157,6 +169,7 @@ export default function App() {
             options={{
               headerTintColor: 'white',
               headerStyle: {backgroundColor: 'black'},
+              headerTitleAlign: 'center',
               headerStyleInterpolator: forFade,
             }}
           />
@@ -165,7 +178,7 @@ export default function App() {
             component={Home}
             options={{
               headerTintColor: 'white',
-              headerStyle: {backgroundColor: 'black'},
+              headerStyle: {backgroundColor: 'white'},
             }}
           />
           <Stack.Screen
