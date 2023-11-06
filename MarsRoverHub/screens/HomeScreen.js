@@ -4,15 +4,15 @@ import {View, Text, StyleSheet} from 'react-native';
 
 
 // MAIN FUNCTION
-function SummaryScreen() {
+function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Home Screen Inside of Screens Folder</Text>
+      <Text>Home Screen For Tab</Text>
     </View>
   );
 }
 
-export default SummaryScreen;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
