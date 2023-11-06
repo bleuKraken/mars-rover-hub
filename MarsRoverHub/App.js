@@ -1,13 +1,17 @@
 import React from 'react';
 
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 // Stack
 import {createStackNavigator} from '@react-navigation/stack';
 // Bottom tab
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {MaterialCommunityIcons} from '@expo/vector-icons';
-
+// Components
+import RoverCard from './components/RoverCard';
+import CuriosityCard from './components/CuriosityCard';
+import SpiritCard from './components/Spirit';
+// Screens
 // import RoverSelectedScreen from './screens/RoverSelectedScreen';
 import SpiritScreen from './screens/SpiritScreen';
 import CuriosityScreen from './screens/CuriosityScreen';
@@ -20,28 +24,48 @@ import HomeScreen from './screens/HomeScreen';
 function Home({navigation}) {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home screen 2</Text>
+        <Text>Home screen 2</Text>
 
+        <RoverCard
+          roverName="Spirit"
+          lastPhotoData={'12/10/23'}
+          cameraCount={'23'}
+          onPress={() => navigation.navigate('Spirit')}
+        />
 
-      <Button
-        title="Spirit Rover"
-        onPress={() => navigation.navigate('Spirit')}
-      />
+        <CuriosityCard
+          roverName="Curiosity"
+          lastPhotoData={'12/10/23'}
+          cameraCount={'23'}
+          onPress={() => navigation.navigate('Curiosity')}
+        />
 
-      <Button
-        title="Curiosity Rover"
-        onPress={() => navigation.navigate('Curiosity')}
-      />
+        <SpiritCard
+          roverName="Spirit"
+          lastPhotoData={'12/10/23'}
+          cameraCount={'23'}
+          onPress={() => navigation.navigate('Spirit')}
+        />
 
-      <Button
-        title="Opportunity Rover"
-        onPress={() => navigation.navigate('Opportunity')}
-      />
+        <Button
+          title="Spirit Rover"
+          onPress={() => navigation.navigate('Spirit')}
+        />
 
-      <Button
-        title="Perseverance Rover"
-        onPress={() => navigation.navigate('Perseverance')}
-      />
+        <Button
+          title="Curiosity Rover"
+          onPress={() => navigation.navigate('Curiosity')}
+        />
+
+        <Button
+          title="Opportunity Rover"
+          onPress={() => navigation.navigate('Opportunity')}
+        />
+
+        <Button
+          title="Perseverance Rover"
+          onPress={() => navigation.navigate('Perseverance')}
+        />
     </View>
   );
 }

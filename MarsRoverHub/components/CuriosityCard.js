@@ -1,9 +1,8 @@
 import {Pressable, StyleSheet, View, Text, Image} from 'react-native';
 
 // MAIN FUNCTION
-function RoverCard({
+function CuriosityCard({
   roverName,
-  roverImage,
   lastPhotoData,
   cameraCount,
   onPress,
@@ -25,7 +24,7 @@ function RoverCard({
   );
 }
 
-export default RoverCard;
+export default CuriosityCard;
 
 const styles = StyleSheet.create({
   container: {

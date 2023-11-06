@@ -1,9 +1,8 @@
 import {Pressable, StyleSheet, View, Text, Image} from 'react-native';
 
 // MAIN FUNCTION
-function RoverCard({
+function SpiritCard({
   roverName,
-  roverImage,
   lastPhotoData,
   cameraCount,
   onPress,
@@ -15,7 +14,7 @@ function RoverCard({
           resizeMode: 'contain',
           height: 250,
         }}
-        source={require('../images/rovers/curiosity_hq.jpg')}
+        source={require('../images/rovers/spirit_hq.jpg')}
       />
         <Text>Name: {roverName}</Text>
 
@@ -25,7 +24,7 @@ function RoverCard({
   );
 }
 
-export default RoverCard;
+export default SpiritCard;
 
 const styles = StyleSheet.create({
   container: {
