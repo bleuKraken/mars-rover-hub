@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 // * Stack
 import {createStackNavigator} from '@react-navigation/stack';
@@ -107,9 +107,12 @@ function BottomTabContainer() {
         headerShown: false,
         tabBarStyle: {backgroundColor: 'black'},
         tabBarActiveTintColor: 'orange',
+
+
+        
       })}>
       <Tab.Screen
-        name="Home Screen"
+        name="HomeScreen"
         component={Home}
         options={{
           title: 'v0.2', // this is hidden, change @param headerTintColor -> white
@@ -142,7 +145,7 @@ export default function App() {
               headerStyle: {backgroundColor: 'black'},
               headerTitleStyle: {
                 fontFamily: "my-custom-font",
-                fontWeight: "300",
+                fontWeight: "bold",
                 fontSize: 23
               },
               headerTitleAlign: 'center',
