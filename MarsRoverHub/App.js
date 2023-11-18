@@ -1,99 +1,72 @@
 import React from 'react';
-
 import {View, Text, StyleSheet, Button, ScrollView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
-// Stack
+// * Stack
 import {createStackNavigator} from '@react-navigation/stack';
-// Bottom tab
+// * Bottom tab
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {MaterialCommunityIcons} from '@expo/vector-icons';
-// Components
-// import RoverCard from './components/RoverCard';
+
 // * Components
-import CuriosityCard from './components/CuriosityCard';
-import SpiritCard from './components/SpiritCard';
-import PerseveranceCard from './components/PerseveranceCard';
-import OpportunityCard from './components/OpportunityCard';
-// Screens
+import RoverCard from './components/RoverCard';
+
+// * Screens
 // import RoverSelectedScreen from './screens/RoverSelectedScreen';
 import SpiritScreen from './screens/SpiritScreen';
 import CuriosityScreen from './screens/CuriosityScreen';
 import OpportunityScreen from './screens/OpportunityScreen';
 import PerseveranceScreen from './screens/PerseveranceScreen';
 
+// * Image locations
+const curiosityImage = require('./images/rovers/curiosity_hq.jpg');
+const perseveranceImage = require('./images/rovers/perseverance_hq.jpg');
+const opportunityImage = require('./images/rovers/opportunity_hq.jpg');
+const spiritImage = require('./images/rovers/spirit_hq.jpg');
+
+// * Status indicator
+const activeGreen = require('./images/icons/green-circle-16x16.png');
+const NotActiveRed = require('./images/icons/red-circle-16x16.png');
+
 // import HomeScreen from './screens/HomeScreen';
 
 // ! This is home screen ~~~~~~~~~~~~~
 function Home({navigation}) {
   return (
-
-      <ScrollView>
-        <CuriosityCard
-          roverName="Curiosity"
-          lastPhotoData={'12/10/23'}
-          cameraCount={'23'}
-          onPress={() => navigation.navigate('Curiosity')}
-        />
-
-        <PerseveranceCard
-          roverName="Perseverance"
-          lastPhotoData={'12/10/23'}
-          cameraCount={'23'}
-          onPress={() => navigation.navigate('Perseverance')}
-        />
-
-        <SpiritCard
-          roverName="Spirit"
-          lastPhotoData={'12/10/23'}
-          cameraCount={'23'}
-          onPress={() => navigation.navigate('Spirit')}
-        />
-
-        <OpportunityCard
-          roverName="Opportunity"
-          lastPhotoData={'12/10/23'}
-          cameraCount={'23'}
-          onPress={() => navigation.navigate('Opportunity')}
-        />
-
-        {/*
-        <Button
-          title="Spirit Rover"
-          onPress={() => navigation.navigate('Spirit')}
-        />
-
-        <Button
-          title="Curiosity Rover"
-          onPress={() => navigation.navigate('Curiosity')}
-        />
-
-        <Button
-          title="Opportunity Rover"
-          onPress={() => navigation.navigate('Opportunity')}
-        />
-
-        <Button
-          title="Perseverance Rover"
-          onPress={() => navigation.navigate('Perseverance')}
-        />
-
-  */}
-      </ScrollView>
+    <ScrollView style={styles.scrollviewBackground}>
+      <RoverCard
+        localImage={curiosityImage}
+        activeStatus={activeGreen}
+        roverName="Curiosity"
+        lastPhotoData={'Oct 18th 2023'}
+        cameraCount={'23'}
+        onPress={() => navigation.navigate('Curiosity')}
+      />
+      <RoverCard
+        localImage={perseveranceImage}
+        activeStatus={activeGreen}
+        roverName="Perseverance"
+        lastPhotoData={'Oct 15th 2023'}
+        cameraCount={'17'}
+        onPress={() => navigation.navigate('Perseverance')}
+      />
+      <RoverCard
+        localImage={spiritImage}
+        activeStatus={NotActiveRed}
+        roverName="Spirit"
+        lastPhotoData={'Nov 18th 2020'}
+        cameraCount={'28'}
+        onPress={() => navigation.navigate('Spirit')}
+      />
+      <RoverCard
+        localImage={opportunityImage}
+        activeStatus={NotActiveRed}
+        roverName="Opportunity"
+        lastPhotoData={'Sept 23 2020'}
+        cameraCount={'17'}
+        onPress={() => navigation.navigate('Opportunity')}
+      />
+    </ScrollView>
   );
 }
-
-// * Profile Screen ~~~~~~~~
-// * delete when not needed
-/*
-function Profile({navigation}) {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Profile screen</Text>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
-  );
-}
-*/
 
 // * News Article Bottom Tab
 function News() {
@@ -104,7 +77,7 @@ function News() {
   );
 }
 
-// Transition animation
+//* Transition animation
 const forFade = ({current, next}) => {
   const opacity = Animated.add(
     current.progress,
@@ -122,18 +95,16 @@ const forFade = ({current, next}) => {
   };
 };
 
-// Stack and Tab Nav Combo
+//* Stack and Tab Nav Combo
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
-// * Bottom Tab Navigation
-// Bottom Tabs
+//* Bottom Tab Navigation
 function BottomTabContainer() {
   return (
     <Tab.Navigator
       screenOptions={({navigation}) => ({
-        headerStyle: {backgroundColor: 'black'},
-        headerTintColor: 'black',
+        headerShown: false,
         tabBarStyle: {backgroundColor: 'black'},
         tabBarActiveTintColor: 'orange',
       })}>
@@ -169,6 +140,11 @@ export default function App() {
             options={{
               headerTintColor: 'white',
               headerStyle: {backgroundColor: 'black'},
+              headerTitleStyle: {
+                fontFamily: "my-custom-font",
+                fontWeight: "300",
+                fontSize: 23
+              },
               headerTitleAlign: 'center',
               headerStyleInterpolator: forFade,
             }}
@@ -209,3 +185,9 @@ export default function App() {
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  scrollviewBackground: {
+    backgroundColor: 'rgb(0, 0, 0)', // Adjust the opacity as needed
+  },
+});
