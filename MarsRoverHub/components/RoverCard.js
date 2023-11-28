@@ -1,6 +1,5 @@
 import {Pressable, StyleSheet, View, Text, Image} from 'react-native';
 
-// * MAIN FUNCTION
 function RoverCard({
   localImage,
   activeStatus,
@@ -47,8 +46,7 @@ const styles = StyleSheet.create({
   },
   overlayContainer: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0, 0, 0, 0.4)', // Adjust the opacity as needed
-    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)', // opacity
   },
   activeStatus: {
     alignSelf: 'center',

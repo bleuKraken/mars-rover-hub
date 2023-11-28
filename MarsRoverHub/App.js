@@ -10,6 +10,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import RoverCard from './components/RoverCard';
 
 // * Screens
+// TODO add universal screen?
 // import RoverSelectedScreen from './screens/RoverSelectedScreen';
 import SpiritScreen from './screens/SpiritScreen';
 import CuriosityScreen from './screens/CuriosityScreen';
@@ -115,7 +116,7 @@ function BottomTabContainer() {
         name="HomeScreen"
         component={Home}
         options={{
-          title: 'v0.2', // this is hidden, change @param headerTintColor -> white
+          title: 'v0.2', 
           tabBarLabel: 'Home',
         }}
       />
@@ -191,6 +192,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   scrollviewBackground: {
-    backgroundColor: 'rgb(0, 0, 0)', // Adjust the opacity as needed
+    backgroundColor: 'rgb(0, 0, 0)', 
   },
 });
