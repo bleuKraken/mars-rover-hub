@@ -108,15 +108,12 @@ function BottomTabContainer() {
         headerShown: false,
         tabBarStyle: {backgroundColor: 'black'},
         tabBarActiveTintColor: 'orange',
-
-
-        
       })}>
       <Tab.Screen
         name="HomeScreen"
         component={Home}
         options={{
-          title: 'v0.2', 
+          title: 'v0.2',
           tabBarLabel: 'Home',
         }}
       />
@@ -145,9 +142,9 @@ export default function App() {
               headerTintColor: 'white',
               headerStyle: {backgroundColor: 'black'},
               headerTitleStyle: {
-                fontFamily: "my-custom-font",
-                fontWeight: "bold",
-                fontSize: 23
+                fontFamily: 'my-custom-font',
+                fontWeight: 'bold',
+                fontSize: 23,
               },
               headerTitleAlign: 'center',
               headerStyleInterpolator: forFade,
@@ -164,25 +161,45 @@ export default function App() {
           <Stack.Screen
             name="Spirit"
             component={SpiritScreen}
-            options={{headerStyleInterpolator: forFade}}
+            options={{
+              headerTintColor: 'white',
+              headerStyle: {backgroundColor: 'black'},
+              headerStyleInterpolator: forFade,
+              headerTitleAlign: 'center',
+            }}
           />
 
           <Stack.Screen
             name="Curiosity"
             component={CuriosityScreen}
-            options={{headerStyleInterpolator: forFade}}
+            options={{
+              headerTintColor: 'white',
+              headerStyle: {backgroundColor: 'black'},
+              headerStyleInterpolator: forFade,
+              headerTitleAlign: 'center',
+            }}
           />
 
           <Stack.Screen
             name="Opportunity"
             component={OpportunityScreen}
-            options={{headerStyleInterpolator: forFade}}
+            options={{
+              headerTintColor: 'white',
+              headerStyle: {backgroundColor: 'black'},
+              headerStyleInterpolator: forFade,
+              headerTitleAlign: 'center',
+            }}
           />
 
           <Stack.Screen
             name="Perseverance"
             component={PerseveranceScreen}
-            options={{headerStyleInterpolator: forFade}}
+            options={{
+              headerTintColor: 'white',
+              headerStyle: {backgroundColor: 'black'},
+              headerStyleInterpolator: forFade,
+              headerTitleAlign: 'center',
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>
@@ -192,6 +209,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
   scrollviewBackground: {
-    backgroundColor: 'rgb(0, 0, 0)', 
+    backgroundColor: 'rgb(0, 0, 0)',
   },
 });

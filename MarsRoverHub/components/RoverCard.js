@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
   overlayContainer: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.4)', // opacity
+    justifyContent: 'flex-end'
   },
   activeStatus: {
     alignSelf: 'center',
@@ -72,5 +73,6 @@ const styles = StyleSheet.create({
   photoAndCamText: {
     color: 'white',
     fontSize: 20,
+    alignSelf: 'flex-end'
   },
 });
