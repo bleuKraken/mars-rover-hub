@@ -10,12 +10,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import RoverCard from './components/RoverCard';
 
 // * Screens
-// TODO add universal screen?
 // import RoverSelectedScreen from './screens/RoverSelectedScreen';
 import SpiritScreen from './screens/SpiritScreen';
 import CuriosityScreen from './screens/CuriosityScreen';
 import OpportunityScreen from './screens/OpportunityScreen';
 import PerseveranceScreen from './screens/PerseveranceScreen';
+import NewsHomeScreen from './screens/NewsHomeScreen';
+
 
 // * Image locations
 const curiosityImage = require('./images/rovers/curiosity_hq.jpg');
@@ -119,7 +120,7 @@ function BottomTabContainer() {
       />
       <Tab.Screen
         name="NewsScreen"
-        component={News}
+        component={NewsHomeScreen}
         options={{
           title: 'News Screen',
           tabBarLabel: 'News Screen',

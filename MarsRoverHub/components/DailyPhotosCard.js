@@ -1,23 +1,15 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
-const DailyPhotosCard = ({ date, sol }) => {
-  // Sample data for FlatList
-  const imageList = [
-    { id: '1', text: 'Image 1 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-    { id: '2', text: 'Image 2 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-    { id: '3', text: 'Image 3 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-    { id: '4', text: 'Image 4 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-    { id: '5', text: 'Image 5 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-    { id: '6', text: 'Image 6 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-  ];
-
+const DailyPhotosCard = ({ date, sol, images, handleImagePress }) => {
   // Render item function for FlatList
   const renderItem = ({ item }) => (
-    <View style={styles.imageWrapper}>
-      <Image source={item.source} style={styles.image} />
-      <Text style={styles.imageText}>{item.text}</Text>
-    </View>
+    <TouchableOpacity onPress={() => handleImagePress(item.source)}>
+      <View style={styles.imageWrapper}>
+        <Image source={item.source} style={styles.image} />
+        <Text style={styles.imageText}>{item.text}</Text>
+      </View>
+    </TouchableOpacity>
   );
 
   return (
@@ -30,7 +22,7 @@ const DailyPhotosCard = ({ date, sol }) => {
 
       {/* FlatList for horizontal scroll */}
       <FlatList
-        data={imageList}
+        data={images}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         horizontal
@@ -43,11 +35,11 @@ const DailyPhotosCard = ({ date, sol }) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: '#222',
     borderRadius: 10,
     padding: 20,
     margin: 10,
-    shadowColor: '#000',
+    shadowColor: '#111',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -64,6 +56,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
+    color: '#fff', 
   },
   imageContainer: {
     flexDirection: 'row',
@@ -79,6 +72,7 @@ const styles = StyleSheet.create({
   imageText: {
     marginTop: 5,
     textAlign: 'center',
+    color: '#fff', 
   },
 });
 
