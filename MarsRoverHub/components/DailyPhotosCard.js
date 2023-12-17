@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  FlatList,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 
-const DailyPhotosCard = ({ date, sol, images, handleImagePress }) => {
+const DailyPhotosCard = ({date, sol, images, handleImagePress}) => {
   // Render item function for FlatList
-  const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => handleImagePress(item.source)}>
+  const renderItem = ({item}) => (
+    <TouchableOpacity onPress={() => handleImagePress(item)}>
       <View style={styles.imageWrapper}>
         <Image source={item.source} style={styles.image} />
         <Text style={styles.imageText}>{item.text}</Text>
@@ -23,7 +30,7 @@ const DailyPhotosCard = ({ date, sol, images, handleImagePress }) => {
       {/* FlatList for horizontal scroll */}
       <FlatList
         data={images}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         renderItem={renderItem}
         horizontal
         showsHorizontalScrollIndicator={false}
@@ -56,7 +63,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     marginBottom: 10,
-    color: '#fff', 
+    color: '#fff',
   },
   imageContainer: {
     flexDirection: 'row',
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
   imageText: {
     marginTop: 5,
     textAlign: 'center',
-    color: '#fff', 
+    color: '#fff',
   },
 });
 
