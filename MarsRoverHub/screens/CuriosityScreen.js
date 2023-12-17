@@ -25,8 +25,7 @@ function CuriosityScreen() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=${API_KEY}`
-      );
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=${API_KEY}`      );
       const result = await response.json();
       setData(result.latest_photos); // Update state with API data
     } catch (error) {
@@ -34,25 +33,18 @@ function CuriosityScreen() {
     }
   };
 
-  const renderItem = ({ item }) => {
-    console.log('Rendering Item:', item);
-    return (
-      <DailyPhotoCard
-        date={item.earth_date}
-        sol={item.sol}
-        images={item.img_src ? [{ id: item.id, text: item.camera.full_name, source: { uri: item.img_src } }] : []}
-        handleImagePress={() => handleImagePress(item)}
-      />
-    );
-  };
+  const renderItem = ({ item }) => (
+    <DailyPhotoCard
+      date={item.earth_date}
+      sol={item.sol}
+      images={item.img_src ? [{ id: item.id, text: item.camera.full_name, source: { uri: item.img_src } }] : []}
+      handleImagePress={handleImagePress}
+    />
+  );
 
-  const handleImagePress = (item) => {
-    if (item.source && item.source.uri) {
-      setSelectedImage(item.source.uri);
-      setModalVisible(true);
-    } else {
-      console.error('Image source or URI is undefined:', item);
-    }
+  const handleImagePress = (image) => {
+    setSelectedImage(image.source.uri);
+    setModalVisible(true);
   };
 
   const closeModal = () => {
