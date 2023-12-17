@@ -10,7 +10,6 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import RoverCard from './components/RoverCard';
 
 // * Screens
-// import RoverSelectedScreen from './screens/RoverSelectedScreen';
 import SpiritScreen from './screens/SpiritScreen';
 import CuriosityScreen from './screens/CuriosityScreen';
 import OpportunityScreen from './screens/OpportunityScreen';
@@ -27,8 +26,6 @@ const spiritImage = require('./images/rovers/spirit_hq.jpg');
 // * Status indicator
 const activeGreen = require('./images/icons/green-circle-16x16.png');
 const NotActiveRed = require('./images/icons/red-circle-16x16.png');
-
-// import HomeScreen from './screens/HomeScreen';
 
 // ! This is home screen ~~~~~~~~~~~~~
 function Home({navigation}) {

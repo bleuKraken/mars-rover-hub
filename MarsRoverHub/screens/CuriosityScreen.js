@@ -1,5 +1,5 @@
 // CuriosityScreen.js
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -24,48 +24,102 @@ function CuriosityScreen() {
       date: 'October 16 2023',
       sol: '2208',
       images: [
-        { id: '1a', text: 'Image 1 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-        { id: '2a', text: 'Image 2 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-        { id: '3a', text: 'Image 3 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-        { id: '4a', text: 'Image 4 Text', source: require('../images/rovers/curiosity_hq.jpg') },        { id: '1', text: 'Image 1 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-        { id: '5a', text: 'Image 5 Text', source: require('../images/rovers/curiosity_hq.jpg') },
+        {
+          id: '1a',
+          text: 'Image 1 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '2a',
+          text: 'Image 2 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '3a',
+          text: 'Image 3 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '4a',
+          text: 'Image 4 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '1',
+          text: 'Image 1 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '5a',
+          text: 'Image 5 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
       ],
     },
     {
       id: '2',
-      date: 'October 16 2023',
-      sol: '2208',
+      date: 'October 15 2023',
+      sol: '2207',
       images: [
-        { id: '1b', text: 'Image 1 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-        { id: '2b', text: 'Image 2 Text', source: require('../images/rovers/curiosity_hq.jpg') },
+        {
+          id: '1b',
+          text: 'Image 1 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '2b',
+          text: 'Image 2 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
       ],
     },
     {
       id: '3',
-      date: 'October 16 2023',
-      sol: '2208',
+      date: 'October 14 2023',
+      sol: '2206',
       images: [
-        { id: '1c', text: 'Image 1 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-        { id: '2c', text: 'Image 2 Text', source: require('../images/rovers/curiosity_hq.jpg') },
+        {
+          id: '1c',
+          text: 'Image 1 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '2c',
+          text: 'Image 2 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
       ],
     },
     {
       id: '4',
-      date: 'October 16 2023',
-      sol: '2208',
+      date: 'October 13 2023',
+      sol: '2205',
       images: [
-        { id: '1d', text: 'Image 1 Text', source: require('../images/rovers/curiosity_hq.jpg') },
-        { id: '2d', text: 'Image 2 Text', source: require('../images/rovers/curiosity_hq.jpg') },
+        {
+          id: '1d',
+          text: 'Image 1 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
+        {
+          id: '2d',
+          text: 'Image 2 Text',
+          source: require('../images/rovers/curiosity_hq.jpg'),
+        },
         // Add other image objects with source paths
       ],
     },
   ];
 
-  const renderItem = ({ item }) => (
-    <DailyPhotoCard date={item.date} sol={item.sol} images={item.images} handleImagePress={handleImagePress} />
+  const renderItem = ({item}) => (
+    <DailyPhotoCard
+      date={item.date}
+      sol={item.sol}
+      images={item.images}
+      handleImagePress={handleImagePress}
+    />
   );
 
-  const handleImagePress = (image) => {
+  const handleImagePress = image => {
     setSelectedImage(image);
     setModalVisible(true);
   };
@@ -81,7 +135,7 @@ function CuriosityScreen() {
 
       <FlatList
         data={data}
-        keyExtractor={(item) => item.id}
+        keyExtractor={item => item.id}
         renderItem={renderItem}
       />
 
@@ -98,7 +152,7 @@ function CuriosityScreen() {
             resizeMode="contain"
           />
           <TouchableOpacity onPress={closeModal} style={styles.closeButton}>
-            <Text style={{ color: 'white', fontSize: 18 }}>Close</Text>
+            <Text style={{color: 'white', fontSize: 18}}>Close</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -111,7 +165,7 @@ export default CuriosityScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black', 
+    backgroundColor: 'black',
   },
   modalContainer: {
     flex: 1,
@@ -127,7 +181,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 20,
     right: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.5)', 
+    backgroundColor: 'rgba(255, 255, 255, 0.5)',
     padding: 10,
     borderRadius: 5,
   },

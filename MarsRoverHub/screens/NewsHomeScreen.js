@@ -1,5 +1,4 @@
-// NewsList.js
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,31 +6,15 @@ import {
   TouchableOpacity,
   Modal,
   Button,
+  Image,
+  StyleSheet,
+  RefreshControl,
 } from 'react-native';
 
-const articles = [
-  {
-    id: '1',
-    title: 'Article 1',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    author: 'John Doe',
-    date: '2023-12-01',
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n Leo in vitae turpis massa. A pellentesque sit amet porttitor eget dolor morbi non arcu. Sit amet consectetur adipiscing elit. \n \nElit at imperdiet dui accumsan sit amet nulla. Morbi tristique senectus et netus et malesuada fames. \n \nAliquam etiam erat velit scelerisque in. Viverra nam libero justo laoreet. \n \n Massa tincidunt dui ut ornare lectus sit. Tortor condimentum lacinia quis vel eros donec ac odio. Ullamcorper morbi tincidunt ornare massa eget egestas. Congue quisque egestas diam in arcu cursus euismod. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet. Fames ac turpis egestas maecenas pharetra convallis posuere. \n \n ',
-  },
-  {
-    id: '2',
-    title: 'Article 2',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    author: 'Jane Smith',
-    date: '2023-12-02',
-    content:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Leo in vitae turpis massa.\n \n A pellentesque sit amet porttitor eget dolor morbi non arcu. Sit amet consectetur adipiscing elit. Elit at imperdiet dui accumsan sit amet nulla. \n \n Morbi tristique senectus et netus et malesuada fames. Aliquam etiam erat velit scelerisque in. Viverra nam libero justo laoreet. Massa tincidunt dui ut ornare lectus sit.  \n \nTortor condimentum lacinia quis vel eros donec ac odio. Ullamcorper morbi tincidunt ornare massa eget egestas. Congue quisque egestas diam in arcu cursus euismod. Nunc mi ipsum faucibus vitae aliquet nec ullamcorper sit amet. \n \n Fames ac turpis egestas maecenas pharetra convallis posuere. Egestas maecenas pharetra convallis posuere morbi leo. Lorem dolor sed viverra ipsum nunc aliquet bibendum enim. Mauris rhoncus aenean vel elit scelerisque mauris pellentesque pulvinar. ',
-  },
-];
-
-const NewsList = () => {
+const NewsHomeScreen = () => {
+  const [articles, setArticles] = useState([]);
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   const openModal = article => {
     setSelectedArticle(article);
@@ -41,59 +24,71 @@ const NewsList = () => {
     setSelectedArticle(null);
   };
 
+  // * Make API request to Spaceflight News API
+  const fetchArticles = async () => {
+    try {
+      const response = await fetch(
+        'https://api.spaceflightnewsapi.net/v4/articles/?search=mars&title_contains=nasa',
+      );
+      const data = await response.json();
+      setArticles(data.results);
+    } catch (error) {
+      console.error('Error fetching articles:', error);
+    }
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchArticles();
+    setRefreshing(false);
+  };
+
+  useEffect(() => {
+    fetchArticles();
+  }, []);
+
   const renderNewsItem = ({item}) => (
     <TouchableOpacity onPress={() => openModal(item)}>
-      <View
-        style={{padding: 16, borderBottomWidth: 1, borderBottomColor: '#555'}}>
-        <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
-          {item.title}
-        </Text>
-        <Text numberOfLines={3} style={{marginTop: 8, color: '#ddd'}}>
-          {item.description}
-        </Text>
+      <View style={styles.newsItem}>
+        <Image source={{uri: item.image_url}} style={styles.newsImage} />
+        <View style={styles.newsTextContainer}>
+          <Text style={styles.newsTitle}>{item.title}</Text>
+          <Text numberOfLines={3} style={styles.newsDescription}>
+            {item.summary}
+          </Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
 
   return (
-    <View style={{backgroundColor: '#000', flex: 1}}>
+    <View style={styles.container}>
       <FlatList
         data={articles}
-        keyExtractor={item => item.id}
+        keyExtractor={item => item.id.toString()}
         renderItem={renderNewsItem}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       />
 
       <Modal visible={selectedArticle !== null} animationType="slide">
-        <View style={{flex: 1, padding: 16, backgroundColor: '#000'}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              marginBottom: 16,
-              marginTop: 42,
-            }}>
-            <Text style={{fontSize: 18, fontWeight: 'bold', color: '#fff'}}>
-              {selectedArticle?.title}
-            </Text>
-            <Text style={{color: '#ddd'}}>{selectedArticle?.date}</Text>
-          </View>
-          <Text style={{fontSize: 14, color: '#aaa', marginBottom: 8}}>
-            By {selectedArticle?.author}
+        <View style={styles.modalContent}>
+          <Image
+            source={{uri: selectedArticle?.image_url}}
+            style={styles.modalImage}
+          />
+          <Text style={styles.modalTitle}>{selectedArticle?.title}</Text>
+          <Text style={styles.modalDate}>{selectedArticle?.published_at}</Text>
+          <Text style={styles.modalAuthor}>
+            By {selectedArticle?.news_site}
           </Text>
-          <Text style={{fontSize: 16, marginBottom: 16, color: '#ddd'}}>
-            {selectedArticle?.description}
+          <Text style={styles.modalSummary}>{selectedArticle?.summary}</Text>
+          <Text style={styles.modalContentText}>
+            {selectedArticle?.content}
           </Text>
-          <Text
-            style={{
-              fontSize: 18,
-              fontWeight: 'bold',
-              marginBottom: 8,
-              color: '#fff',
-            }}>
-            Full Article
-          </Text>
-          <Text style={{color: '#ddd'}}>{selectedArticle?.content}</Text>
-          <View style={{position: 'absolute', top: 16, left: 16, zIndex: 1}}>
+
+          <View style={styles.modalButton}>
             <Button title="Back" onPress={closeModal} />
           </View>
         </View>
@@ -102,4 +97,76 @@ const NewsList = () => {
   );
 };
 
-export default NewsList;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+  },
+  newsItem: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#555',
+    flexDirection: 'row',
+  },
+  newsImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 5,
+    marginRight: 16,
+  },
+  newsTextContainer: {
+    flex: 1,
+  },
+  newsTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  newsDescription: {
+    color: '#ddd',
+  },
+  modalContent: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: '#000',
+  },
+  modalImage: {
+    height: 200,
+    borderRadius: 5,
+    marginBottom: 16,
+  },
+  modalTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 8,
+  },
+  modalDate: {
+    fontSize: 14,
+    color: '#ddd',
+    marginBottom: 8,
+  },
+  modalAuthor: {
+    fontSize: 16,
+    color: '#ddd',
+    marginBottom: 16,
+  },
+  modalSummary: {
+    fontSize: 16,
+    color: '#ddd',
+    marginBottom: 16,
+  },
+  modalContentText: {
+    fontSize: 16,
+    color: '#ddd',
+    marginBottom: 16,
+  },
+  modalButton: {
+    position: 'absolute',
+    top: 16,
+    left: 16,
+    zIndex: 1,
+  },
+});
+
+export default NewsHomeScreen;
